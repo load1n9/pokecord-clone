@@ -59,9 +59,11 @@ class MyClient(discord.Client):
            for p in something["data"]["pokemon"]:
              if "-" in p:
                 pokemonstring,useless,typething = p.partition("-")
-                await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(pokemonstring).id)+useless+typething+".png")
+                embed = discord.Embed(title=p,description="#"+str(pb.pokemon(pokemonstring).id),color=discord.Color.green())
+                embed.set_image(url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(pokemonstring).id)+useless+typething+".png")
              else:
-                await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(p).id)+".png")
+                 embed = discord.Embed(title=p,description="#"+str(pb.pokemon(p).id),color=discord.Color.green())
+                 embed.set_image(url= "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(p).id)+".png")
         if "???help" in message.content:
            embed = discord.Embed(title="commands",description="a list of commands",color=discord.Color.green())
            embed.add_field(name="???add <pokemon>",value="adds pokemon",inline=True)

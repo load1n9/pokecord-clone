@@ -66,8 +66,8 @@ class MyClient(discord.Client):
           await message.channel.send("```???add <pokemon>: adds the pokemon \n ???pokemon: displays all your pokemon```")
         if "???test" in message.content:
            embed = discord.Embed(title="Your Tittle",description="A description",color=discord.Color.green())
-           embed.add_field(name="Some field",vaue="Some  value",inline=True)
-           embed.add_field(name="Another field",vaue="Another  value",inline=False)
+           embed.add_field(name="Some field",value="Some  value",inline=True)
+           embed.add_field(name="Another field",value="Another  value",inline=False)
            await message.channel.send(embed=embed)
 
 

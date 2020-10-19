@@ -57,7 +57,10 @@ class MyClient(discord.Client):
            something = fclient.query(q.get(q.match(q.index("users_by_name"),str(message.author))))
 
            for p in something["data"]["pokemon"]:
-             await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(str(p).replace(" ","")).id)+".png")
+             if "1" in p:
+                await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(str(p).replace(" ","").replace("1","")).id)+"-gmax.png")
+             else:
+                await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(str(p).replace(" ","")).id)+".png")
         if "???help" in message.content:
           await message.channel.send("```???add <pokemon>: adds the pokemon \n ???pokemon: displays all your pokemon```")
 

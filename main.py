@@ -57,8 +57,9 @@ class MyClient(discord.Client):
            something = fclient.query(q.get(q.match(q.index("users_by_name"),str(message.author))))
 
            for p in something["data"]["pokemon"]:
-             if "-gmax" in p:
-                await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(str(p).replace(" ","").replace("-gmax","")).id)+"-gmax.png")
+             if "-" in p:
+                pokemonstring,useless,typething = p.partition("-")
+                await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(str(pokemonstring)).id)+useless+typething".png")
              else:
                 await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(str(p).replace(" ","")).id)+".png")
         if "???help" in message.content:

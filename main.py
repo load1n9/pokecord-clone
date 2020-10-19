@@ -59,9 +59,10 @@ class MyClient(discord.Client):
            for p in something["data"]["pokemon"]:
              if "-" in p:
                 pokemonstring,useless,typething = p.partition("-")
-                await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(str(pokemonstring)).id)+useless+typething".png")
+                print(pokemonstring, useless, typething)
+                await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(pokemonstring).id)+useless+typething".png")
              else:
-                await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(str(p).replace(" ","")).id)+".png")
+                await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(str(p)).id)+".png")
         if "???help" in message.content:
           await message.channel.send("```???add <pokemon>: adds the pokemon \n ???pokemon: displays all your pokemon```")
 

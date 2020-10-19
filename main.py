@@ -64,6 +64,11 @@ class MyClient(discord.Client):
                 await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(p).id)+".png")
         if "???help" in message.content:
           await message.channel.send("```???add <pokemon>: adds the pokemon \n ???pokemon: displays all your pokemon```")
+        if "???test" in message.content:
+           embed = discord.Embed(title="Your Tittle",description="A description",color=discord.Color.green())
+           embed.add_field(name="Some field",vaue="Some  value",inline=True)
+           embed.add_field(name="Another field",vaue="Another  value",inline=False)
+           await message.channel.send(embed=embed)
 
 
 client = MyClient()

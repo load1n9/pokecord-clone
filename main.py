@@ -101,7 +101,7 @@ class MyClient(discord.Client):
             pokeid = random.randint(1,898)
             await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pokeid)+".png")
             msg = await client.wait_for('message')
-            await message.channel.send(msg)
+            await message.channel.send(msg.content)
         if "???help" in message.content:
             embed = discord.Embed(
                 title="commands", description="a list of commands", color=discord.Color.green())

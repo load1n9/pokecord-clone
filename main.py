@@ -103,8 +103,23 @@ class MyClient(discord.Client):
             msg = await client.wait_for('message')
             if pb.pokemon(pokeid).name in msg.content:
               await message.channel.send("correct")
+              caughtpoke =  pb.pokemon(pokeid).name
+              something = fclient.query(
+                    q.get(q.match(q.index("users_by_name"), str(message.author))))
+              pokemon = something["data"]["pokemon"]
+              reference = something["ref"]
+              pokemon.append(caughtpoke)
+              data = {
+                    "data": {
+                        "pokemon": pokemon
+                    }
+                }
+              fclient.query(q.update(q.ref(reference), data))
             else:
               await message.channel.send("incorrect the correct pokemon was "+pb.pokemon(pokeid).name)
+
+
+
         if "???help" in message.content:
             embed = discord.Embed(
                 title="commands", description="a list of commands", color=discord.Color.green())
@@ -120,3 +135,4 @@ class MyClient(discord.Client):
 client = MyClient()
 
 client.run(os.getenv("TOKEN"))
+

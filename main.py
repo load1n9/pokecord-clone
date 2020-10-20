@@ -58,7 +58,7 @@ class MyClient(discord.Client):
                     title="pokemon does not exist", color=discord.Color.green())
                 await message.channel.send(embed=embed)
         if "???find" in message.content:
-            person = message.content.lower().replace(" ", "").replace("???find", "")
+            person = message.content.replace(" ", "").replace("???find", "")
             try:
                 something = fclient.query(q.get(q.match(q.index("users_by_name"), str(person))))
                 for p in something["data"]["pokemon"]:

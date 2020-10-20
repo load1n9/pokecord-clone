@@ -46,9 +46,9 @@ class MyClient(discord.Client):
               }
               
             fclient.query(q.update(q.ref(reference), data))
-
-            await message.channel.send("added "+stuff)
-            await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(str(stuff).replace(" ","")).id)+".png")
+            embed = discord.Embed(title="added"+stuff,color=discord.Color.green())
+            embed.set_image(url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(str(stuff).replace(" ","")).id)+".png")
+            await message.channel.send(embed=embed)
           except: 
             await message.channel.send("pokemon doesnt exist")
 

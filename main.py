@@ -74,7 +74,7 @@ class MyClient(discord.Client):
             pokeid = random.randint(1,898)
             embed1 = discord.Embed(title="‌‌A wild pokémon has аppeаred!", description="Guess the pokémon аnd type the pokémon's name to cаtch it", color=discord.Color.green())
             embed1.set_image(url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pokeid)+".png")
-            await message.channel.send(embed1=embed1)
+            await message.channel.send(embed=embed1)
             msg = await client.wait_for('message')
             if pb.pokemon(pokeid).name in msg.content:
               caughtpoke =  pb.pokemon(pokeid).name

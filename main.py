@@ -30,34 +30,7 @@ class MyClient(discord.Client):
             }
             }
             fclient.query(q.create(q.collection('users'), person_data))
-
-        if "???add" in message.content:
-            try:
-                stuff = message.content.replace("???add", "").replace(" ", "")
-                print(pb.pokemon(stuff).height)
-                something = fclient.query(
-                    q.get(q.match(q.index("users_by_name"), str(message.author))))
-
-                pokemon = something["data"]["pokemon"]
-                reference = something["ref"]
-
-                pokemon.append(stuff)
-
-                data = {
-                    "data": {
-                        "pokemon": pokemon
-                    }
-                }
-
-                fclient.query(q.update(q.ref(reference), data))
-                embed = discord.Embed(title="added"+stuff, color=discord.Color.green())
-                embed.set_image(url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(
-                    pb.pokemon(str(stuff).replace(" ", "")).id)+".png")
-                await message.channel.send(embed=embed)
-            except:
-                embed = discord.Embed(
-                    title="pokemon does not exist", color=discord.Color.green())
-                await message.channel.send(embed=embed)
+            
         if "???find" in message.content:
             person = message.content.replace(" ", "").replace("???find", "")
             try:
@@ -135,4 +108,3 @@ class MyClient(discord.Client):
 client = MyClient()
 
 client.run(os.getenv("TOKEN"))
-

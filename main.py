@@ -78,7 +78,7 @@ class MyClient(discord.Client):
             def check(m):
                return m.channel == message.channel and m.author != client.user
             msg = await client.wait_for('message',check=check)
-            if pb.pokemon(pokeid).name in msg.content:
+            if pb.pokemon(pokeid).name in msg.content.lower():
               caughtpoke =  pb.pokemon(pokeid).name
               something = fclient.query(
                     q.get(q.match(q.index("users_by_name"), str(msg.author))))

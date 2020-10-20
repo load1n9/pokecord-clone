@@ -81,7 +81,7 @@ class MyClient(discord.Client):
             if pb.pokemon(pokeid).name in msg.content:
               caughtpoke =  pb.pokemon(pokeid).name
               something = fclient.query(
-                    q.get(q.match(q.index("users_by_name"), str(message.author))))
+                    q.get(q.match(q.index("users_by_name"), str(msg.author))))
               pokemon = something["data"]["pokemon"]
               reference = something["ref"]
               pokemon.append(caughtpoke)

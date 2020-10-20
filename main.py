@@ -32,7 +32,7 @@ class MyClient(discord.Client):
             fclient.query(q.create(q.collection('users'), person_data))
             
         if "???find" in message.content:
-            person = message.content.replace(" ", "").replace("???find", "")
+            person = message.content.replace(" ", "",1).replace("???find", "")
             try:
                 something = fclient.query(q.get(q.match(q.index("users_by_name"), str(person))))
                 for p in something["data"]["pokemon"]:
@@ -72,10 +72,11 @@ class MyClient(discord.Client):
                     await message.channel.send(embed=embed)
         if "???catch" in message.content:
             pokeid = random.randint(1,898)
-            await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pokeid)+".png")
+            embed1 = discord.Embed(title="‌‌A wild pokémon has аppeаred!", description="Guess the pokémon аnd type the pokémon's name to cаtch it", color=discord.Color.green())
+            embed1.set_image(url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pokeid)+".png")
+            await message.channel.send(embed1=embed)
             msg = await client.wait_for('message')
             if pb.pokemon(pokeid).name in msg.content:
-              await message.channel.send("correct")
               caughtpoke =  pb.pokemon(pokeid).name
               something = fclient.query(
                     q.get(q.match(q.index("users_by_name"), str(message.author))))
@@ -88,16 +89,19 @@ class MyClient(discord.Client):
                     }
                 }
               fclient.query(q.update(q.ref(reference), data))
+              embed = discord.Embed(title=caughtpoke+" was successfully caught", description= "#"+str(pokeid), color=discord.Color.green())
+              await message.channel.send(embed=embed)
+
             else:
-              await message.channel.send("incorrect the correct pokemon was "+pb.pokemon(pokeid).name)
+              await message.channel.send(pb.pokemon(pokeid).name+" fled")
 
 
 
         if "???help" in message.content:
             embed = discord.Embed(
                 title="commands", description="a list of commands", color=discord.Color.green())
-            embed.add_field(name="???add <pokemon>",
-                            value="adds pokemon", inline=True)
+            embed.add_field(name="???catch",
+                            value="finds pokemon nearby", inline=True)
             embed.add_field(name="???pokemon",
                             value="list of pokemon", inline=False)
             embed.add_field(name="???find <user>",

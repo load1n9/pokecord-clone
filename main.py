@@ -100,7 +100,7 @@ class MyClient(discord.Client):
         if "???catch" in message.content:
             pokeid = random.randint(1,898)
             await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pokeid)+".png")
-            msg = await client.wait_for('message', check=check)
+            msg = await client.wait_for('message')
             await message.channel.send(msg)
         if "???help" in message.content:
             embed = discord.Embed(

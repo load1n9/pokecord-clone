@@ -1,5 +1,6 @@
 import discord
 import os
+import random
 import pokebase as pb
 from faunadb import query as q
 from faunadb.objects import Ref
@@ -96,6 +97,9 @@ class MyClient(discord.Client):
                     embed.set_image(
                         url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(p).id)+".png")
                     await message.channel.send(embed=embed)
+        if "???catch" in message.content:
+            pokeid = random.randint(1,898)
+            await message.channel.send("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pokeid)+".png")
         if "???help" in message.content:
             embed = discord.Embed(
                 title="commands", description="a list of commands", color=discord.Color.green())

@@ -55,7 +55,7 @@ class MyClient(discord.Client):
         if "???pokemon" in message.content:
             something = fclient.query(
                 q.get(q.match(q.index("users_by_name"), str(message.author))))
-            embed = discord.Embed(title=message.author+"'s pokemon", color=discord.Color.green())
+            embed = discord.Embed(title=str(message.author)+"'s pokemon", color=discord.Color.green())
             for p in something["data"]["pokemon"]:
                 embed.add_field(name=p, inline=True)
             message.send(embed=embed)

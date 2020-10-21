@@ -63,6 +63,7 @@ class MyClient(discord.Client):
                         pb.pokemon(pokemonstring).id)+useless+typething+".png")
                 embed.add_field(name="id:",value=str(pb.pokemon(pokemonstring).id))
                 embed.add_field(name="height:",value=str(pb.pokemon(pokemonstring).height))
+                embed.add_field(name="weight:",value=str(pb.pokemon(pokemonstring).weight))
                 await message.channel.send(embed=embed)
              else:
                 embed = discord.Embed(title=p, color=discord.Color.green())

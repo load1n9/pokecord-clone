@@ -55,21 +55,10 @@ class MyClient(discord.Client):
         if "???pokemon" in message.content:
             something = fclient.query(
                 q.get(q.match(q.index("users_by_name"), str(message.author))))
-
+            embed = discord.Embed(title=message.author+"'s pokemon", color=discord.Color.green())
             for p in something["data"]["pokemon"]:
-                if "-" in p:
-                    pokemonstring, useless, typething = p.partition("-")
-                    embed = discord.Embed(
-                        title=p, description="#"+str(pb.pokemon(pokemonstring).id), color=discord.Color.green())
-                    embed.set_image(url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(
-                        pb.pokemon(pokemonstring).id)+useless+typething+".png")
-                    await message.channel.send(embed=embed)
-                else:
-                    embed = discord.Embed(
-                        title=p, description="#"+str(pb.pokemon(p).id), color=discord.Color.green())
-                    embed.set_image(
-                        url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(p).id)+".png")
-                    await message.channel.send(embed=embed)
+                embed.add_field(name=p, inline=True)
+            message.send(embed=embed)
         if "???catch" in message.content:
             pokeid = random.randint(1,898)
             embed1 = discord.Embed(title="‌‌A wild pokémon has аppeаred!", description="Guess the pokémon аnd type the pokémon's name to cаtch it", color=discord.Color.green())

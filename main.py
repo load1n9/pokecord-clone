@@ -62,10 +62,14 @@ class MyClient(discord.Client):
                 embed.set_image(url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(
                         pb.pokemon(pokemonstring).id)+useless+typething+".png")
                 embed.add_field(name="id:",value=str(pb.pokemon(pokemonstring).id))
+                embed.add_field(name="height:",value=str(pb.pokemon(pokemonstring).height))
                 await message.channel.send(embed=embed)
              else:
                 embed = discord.Embed(title=p, color=discord.Color.green())
-                embed.set_image(url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+1+".png")
+                embed.set_image(url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(p).id)+".png")
+                embed.add_field(name="id:",value=str(pb.pokemon(p).id))
+                embed.add_field(name="height:",value=str(pb.pokemon(p).height))
+                embed.add_field(name="weight:",value=str(pb.pokemon(p).weight))
                 await message.channel.send(embed=embed)
 
         if "???catch" in message.content:

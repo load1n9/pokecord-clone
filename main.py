@@ -58,7 +58,7 @@ class MyClient(discord.Client):
             embed = discord.Embed(title=str(message.author)+"'s pokemon", color=discord.Color.green())
             for p in something["data"]["pokemon"]:
                 embed.add_field(name=p, value = "temp",inline=True)
-            message.send(embed=embed)
+            message.channel.send(embed=embed)
         if "???catch" in message.content:
             pokeid = random.randint(1,898)
             embed1 = discord.Embed(title="‌‌A wild pokémon has аppeаred!", description="Guess the pokémon аnd type the pokémon's name to cаtch it", color=discord.Color.green())

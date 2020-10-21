@@ -55,7 +55,7 @@ class MyClient(discord.Client):
         if "???coins" in message.content:
             something = fclient.query(
                 q.get(q.match(q.index("users_by_name"), str(message.author))))
-            message.channel.send("coins: "+str(something["data"]["coins"]))
+            await message.channel.send("coins: "+str(something["data"]["coins"]))
         if "???select" in message.content:
              something = fclient.query(
                 q.get(q.match(q.index("users_by_name"), str(message.author))))

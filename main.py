@@ -75,8 +75,13 @@ class MyClient(discord.Client):
 
         if "???catch" in message.content:
             pokeid = random.randint(1,898)
+            shiny = random.randint(1,5)
+            if shiny == 100:
+                begurl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/"
+            else:
+                begurl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
             embed1 = discord.Embed(title="‌‌A wild pokémon has аppeаred!", description="Guess the pokémon аnd type the pokémon's name to cаtch it", color=discord.Color.green())
-            embed1.set_image(url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pokeid)+".png")
+            embed1.set_image(url=begurl+str(pokeid)+".png")
             await message.channel.send(embed=embed1)
             def check(m):
                return m.channel == message.channel and m.author != client.user

@@ -64,6 +64,7 @@ class MyClient(discord.Client):
                 q.get(q.match(q.index("users_by_name"), str(message.author))))
              msg = int(message.content.replace(" ","").replace("???select",""))
              embed = discord.Embed(title=something["data"]["pokemon"][msg-1], color=discord.Color.green())
+             embed.set_image(url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(str(something["data"]["pokemon"][msg-1])).id)+".png")
              await message.channel.send(embed=embed)
 
         if "???catch" in message.content:

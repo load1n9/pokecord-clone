@@ -26,6 +26,7 @@ class MyClient(discord.Client):
         except:
             person_data = {"data": {
                 "name": str(message.author),
+                "coins": 0,
                 "pokemon": []
             }
             }

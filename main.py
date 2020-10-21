@@ -76,7 +76,7 @@ class MyClient(discord.Client):
         if "???catch" in message.content:
             pokeid = random.randint(1,898)
             shiny = random.randint(1,5)
-            if shiny == 100:
+            if shiny == 5:
                 begurl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/"
             else:
                 begurl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"

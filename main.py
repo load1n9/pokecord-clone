@@ -62,7 +62,7 @@ class MyClient(discord.Client):
         if "???select" in message.content:
              something = fclient.query(
                 q.get(q.match(q.index("users_by_name"), str(message.author))))
-             msg = int(something.replace(" ","").replace("???select"))
+             msg = int(message.content.replace(" ","").replace("???select"))
              embed = discord.Embed(title=something["data"]["pokemon"][msg-1], color=discord.Color.green())
              await message.channel.send(embed=embed)
 

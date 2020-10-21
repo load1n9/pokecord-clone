@@ -57,7 +57,7 @@ class MyClient(discord.Client):
                 q.get(q.match(q.index("users_by_name"), str(message.author))))
             embed = discord.Embed(title=str(message.author)+"'s pokemon", color=discord.Color.green())
             for p in something["data"]["pokemon"]:
-                embed.add_field(name=p, value = pb.pokemon(p).id,inline=True)
+                embed.add_field(name=p, value = str(pb.pokemon(p).id),inline=True)
             await message.channel.send(embed=embed)
         if "???catch" in message.content:
             pokeid = random.randint(1,898)

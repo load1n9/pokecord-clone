@@ -69,6 +69,7 @@ class MyClient(discord.Client):
                 embed = discord.Embed(title=p, color=discord.Color.green())
                 embed.set_image(url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(
                         pb.pokemon(pokemonstring).id)+useless+typething+".png")
+                embed.add_field(name="id:",value=str(pb.pokemon(pokemonstring).id))
                 await message.channel.send(embed=embed)
              else:
                 embed = discord.Embed(title=p, color=discord.Color.green())

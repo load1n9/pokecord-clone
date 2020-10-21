@@ -111,6 +111,8 @@ class MyClient(discord.Client):
                             value="list of pokemon", inline=False)
             embed.add_field(name="???find <user>",
                             value="lists any users pokemon", inline=False)
+            embed.add_field(name="???select <pokemon number>",
+                            value="lists details about one of your pokemon", inline=False)
             await message.channel.send(embed=embed)
 
 

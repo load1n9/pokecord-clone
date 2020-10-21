@@ -52,6 +52,10 @@ class MyClient(discord.Client):
             for p in something["data"]["pokemon"]:
                 embed.add_field(name=p, value = "...",inline=True)
             await message.channel.send(embed=embed)
+        if "???coins" in message.content:
+            something = fclient.query(
+                q.get(q.match(q.index("users_by_name"), str(message.author))))
+            message.channel.send("coins: "+str(something["data"]["coins"]))
         if "???select" in message.content:
              something = fclient.query(
                 q.get(q.match(q.index("users_by_name"), str(message.author))))

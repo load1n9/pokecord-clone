@@ -35,18 +35,10 @@ class MyClient(discord.Client):
             person = message.content.replace(" ", "",1).replace("???find", "")
             try:
                 something = fclient.query(q.get(q.match(q.index("users_by_name"), str(person))))
+                embed = discord.Embed(title="user's pokemon list", color=discord.Color.green())
                 for p in something["data"]["pokemon"]:
-                    if "-" in p:
-                        pokemonstring, useless, typething = p.partition("-")
-                        embed = discord.Embed(
-                            title=p, description="#"+str(pb.pokemon(pokemonstring).id), color=discord.Color.green())
-                        embed.set_image(url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(
-                            pb.pokemon(pokemonstring).id)+useless+typething+".png")
-                        await message.channel.send(embed=embed)
-                    else:
-                        embed = discord.Embed(title=p, description="#"+str(pb.pokemon(p).id), color=discord.Color.green())
-                        embed.set_image(url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+str(pb.pokemon(p).id)+".png")
-                        await message.channel.send(embed=embed)
+                   embed.add_field(name=p, value = "...",inline=True)
+                await message.channel.send(embed=embed)
             except:
                 embed = discord.Embed(
                     title=person + " does not exist", color=discord.Color.green())

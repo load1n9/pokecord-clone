@@ -14,7 +14,7 @@ class MyClient(discord.Client):
     async def on_ready(self):
 
         print('Logged on as', self.user)
-        await bot.change_presence(
+        await self.change_presence(
             activity=discord.Activity(
                 type=discord.ActivityType.watching,
                 name="???help"

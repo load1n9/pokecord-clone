@@ -149,36 +149,39 @@ class MyClient(discord.Client):
                 reference = something["ref"]
                 shopReference = shop["ref"]
                 seller = fclient.query(q.get(q.match(q.index("users_by_name"), str(shopPokemon[msg]["user"]))))
-                sellerCoins = int(seller["data"]["coins"])
-                sellerReference = seller["ref"]
-                buyerCoins = int(something["data"]["coins"])
-                if buyerCoins >= int(shopPokemon[msg]["price"]):
-                   buyerCoins -= int(shopPokemon[msg]["price"])
-                   sellerCoins += int(shopPokemon[msg]["price"])
-                   del shopPokemon[int(msg)]
-                   pokemon.append(shopPokemon[msg]["poke"])
-                   buyerData = {
+                if str(message.author) == str(shopPokemon[msg]["user"]):
+                    await message.channel.send("sorry you cannot buy your own pokemon")
+                else:
+                  sellerCoins = int(seller["data"]["coins"])
+                  sellerReference = seller["ref"]
+                  buyerCoins = int(something["data"]["coins"])
+                  if buyerCoins >= int(shopPokemon[msg]["price"]):
+                     buyerCoins -= int(shopPokemon[msg]["price"])
+                     sellerCoins += int(shopPokemon[msg]["price"])
+                     pokemon.append(shopPokemon[msg]["poke"])
+                     del shopPokemon[int(msg)]
+                     buyerData = {
                        "data" : {
                            "pokemon": pokemon,
                            "coins": buyerCoins
                        }
-                   }
-                   sellerData = {
+                     }
+                     sellerData = {
                        "data" : {
                            "coins": sellerCoins
                        }
-                   }
-                   shopData = {
+                     }
+                     shopData = {
                        "data" : {
                            "pokemon": shopPokemon
                        }
-                   }
-                   fclient.query(q.update(q.ref(reference), buyerData))
-                   fclient.query(q.update(q.ref(shopReference), shopData))
-                   fclient.query(q.update(q.ref(sellerReference), sellerData))
-                   await message.channel.send("success")
-                else:
-                  await message.channel.send("you're lacking coins")
+                     }
+                     fclient.query(q.update(q.ref(reference), buyerData))
+                     fclient.query(q.update(q.ref(shopReference), shopData))
+                     fclient.query(q.update(q.ref(sellerReference), sellerData))
+                     await message.channel.send("success")
+                  else:
+                    await message.channel.send("you're lacking coins")
                 
         if "???transfer" in message.content:
             msg = message.content.replace("???transfer","").replace(" ","",1)

@@ -116,12 +116,12 @@ class Client(discord.Client):
                 else:
                     begurl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
                 embed1 = discord.Embed(title="‌‌A wild pokémon has аppeаred!",
-                                       description="Guess the pokémon аnd type ???name and the pokémon's name to cаtch it", color=discord.Color.green())
+                                       description="Guess the pokémon аnd type ???p and the pokémon's name to cаtch it", color=discord.Color.green())
                 embed1.set_image(url=begurl+str(pokeid)+".png")
                 await message.channel.send(embed=embed1)
 
                 def check(m):
-                    return m.channel == message.channel and m.author != client.user and "???name" in m.content
+                    return m.channel == message.channel and m.author != client.user and "???p" in m.content
                 msg = await client.wait_for('message', check=check)
                 if pb.pokemon(pokeid).name in msg.content.lower():
                     caughtpoke = pb.pokemon(pokeid).name
@@ -153,12 +153,12 @@ class Client(discord.Client):
             else:
                 begurl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
             embed1 = discord.Embed(title="‌‌A wild pokémon has аppeаred!",
-                                   description="Guess the pokémon аnd type ???name and the pokémon's name to cаtch it", color=discord.Color.green())
+                                   description="Guess the pokémon аnd type ???p and the pokémon's name to cаtch it", color=discord.Color.green())
             embed1.set_image(url=begurl+str(pokeid)+".png")
             await message.channel.send(embed=embed1)
 
             def check(m):
-                 return m.channel == message.channel and m.author != client.user and "???name" in m.content
+                 return m.channel == message.channel and m.author != client.user and "???p" in m.content
             msg = await client.wait_for('message', check=check)
             if pb.pokemon(pokeid).name in msg.content.lower():
                 caughtpoke = pb.pokemon(pokeid).name

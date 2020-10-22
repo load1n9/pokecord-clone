@@ -142,8 +142,10 @@ class MyClient(discord.Client):
                             value="lists any users pokemon", inline=False)
             embed.add_field(name="???select <pokemon number>",
                             value="lists details about one of your pokemon", inline=False)
-            embed.add_field(name="???coins>",
-                            value="displays coin count", inline=False)             
+            embed.add_field(name="???coins",
+                            value="displays coin count", inline=False)        
+            embed.add_field(name="???sell <pokemon>",
+                            value="sells a pokemon", inline=False)           
             await message.channel.send(embed=embed)
 
 

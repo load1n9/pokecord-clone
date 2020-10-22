@@ -140,7 +140,7 @@ class MyClient(discord.Client):
             except:
                 await message.channel.send(msg[0]+" doesnt exist or you dont have it")
         if "???buy" in message.content:
-                msg = int(message.content.replace("???buy","").replace(" ","",1))+1
+                msg = int(message.content.replace("???buy","").replace(" ","",1))-1
             #try:
                 something = fclient.query(q.get(q.match(q.index("users_by_name"), str(message.author))))
                 shop = fclient.query(q.get(q.match(q.index("users_by_name"), "shop")))

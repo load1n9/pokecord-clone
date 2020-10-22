@@ -26,7 +26,10 @@ class MyClient(discord.Client):
         if message.author == client.user:
 
             return
-        spawn = random.randint(1,100)
+        if "pokemon" in message.channel.name:
+            spawn = random.randint(90,100)
+        else:
+            spawn = random.randint(1,100)
         try:
             fclient.query(
                 q.get(q.match(q.index("users_by_name"), str(message.author))))

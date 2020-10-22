@@ -135,7 +135,6 @@ class MyClient(discord.Client):
                 something = fclient.query(q.get(q.match(q.index("users_by_name"), "shop")))
                 embed = discord.Embed(title="shop", description="pokemon on the market", color=discord.Color.green())
                 for p in something["data"]["pokemon"]:
-                   embed.add_field(name="----------------", value = "...",inline=True)
                    embed.add_field(name="pokemon: ", value = p["poke"],inline=True)
                    embed.add_field(name="price: ", value = p["price"],inline=True)
                    embed.add_field(name="user: ", value = p["user"],inline=True)
@@ -156,7 +155,9 @@ class MyClient(discord.Client):
             embed.add_field(name="???coins",
                             value="displays coin count", inline=False)        
             embed.add_field(name="???sell <pokemon>",
-                            value="sells a pokemon", inline=False)           
+                            value="sells a pokemon", inline=False)    
+            embed.add_field(name= "???shop",
+                            value="displays pokemon in the shop", inline=False)       
             await message.channel.send(embed=embed)
 
 

@@ -256,7 +256,7 @@ class Client(discord.Client):
                     fclient.query(q.update(q.ref(reference), buyerData))
                     fclient.query(q.update(q.ref(shopReference), shopData))
                     fclient.query(q.update(q.ref(sellerReference), sellerData))
-                    await message.channel.send(boughtThing+" was added to your account")
+                    await message.channel.send("+"+boughtThing+" was added to your account")
                 else:
                     await message.channel.send("you're lacking coins")
 

@@ -136,9 +136,9 @@ class MyClient(discord.Client):
                 embed = discord.Embed(title="shop", description="pokemon on the market", color=discord.Color.green())
                 for p in something["data"]["pokemon"]:
                    embed.add_field(name="----------------", value = "...",inline=True)
-                   embed.add_field(name="pokemon: ", value = p.poke,inline=True)
-                   embed.add_field(name="price: ", value = p.price,inline=True)
-                   embed.add_field(name="user: ", value = p.user,inline=True)
+                   embed.add_field(name="pokemon: ", value = p["poke"],inline=True)
+                   embed.add_field(name="price: ", value = p["price"],inline=True)
+                   embed.add_field(name="user: ", value = p["user"],inline=True)
 
                 await message.channel.send(embed=embed)
 

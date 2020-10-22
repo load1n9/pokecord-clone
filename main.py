@@ -274,7 +274,9 @@ class MyClient(discord.Client):
             embed.add_field(name="???buy <number on list>",
                             value="buys pokemon from the shop", inline=False)   
             embed.add_field(name= "???shop",
-                            value="displays pokemon in the shop", inline=False)       
+                            value="displays pokemon in the shop", inline=False)
+            embed.add_field(name="???spawn",
+                            value="pay 10 coins to lure pokemon nearby", inline=False)       
             await message.channel.send(embed=embed)
 
 

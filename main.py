@@ -14,6 +14,12 @@ class MyClient(discord.Client):
     async def on_ready(self):
 
         print('Logged on as', self.user)
+        await bot.change_presence(
+            activity=discord.Activity(
+                type=discord.ActivityType.watching,
+                name="???help"
+            )
+        )
 
     async def on_message(self, message):
 
@@ -121,7 +127,7 @@ class MyClient(discord.Client):
 
              else:
                  await message.channel.send("sorry you're lacking coins")
-        if spawn >= 97:
+        if spawn >= 98:
             pokeid = random.randint(1,898)
             shiny = random.randint(1,100)
             if shiny == 100:

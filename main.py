@@ -112,8 +112,7 @@ class MyClient(discord.Client):
 
 
         if "???sell" in message.content:
-            msg = message.content.replace("???sell","").replace(" ","",1)
-            try:
+                msg = message.content.replace("???sell","").replace(" ","",1)
                 something = fclient.query(q.get(q.match(q.index("users_by_name"), str(message.author))))
                 pokemon = something["data"]["pokemon"]
                 coins = something["data"]["coins"]
@@ -128,9 +127,6 @@ class MyClient(discord.Client):
                 fclient.query(q.update(q.ref(reference), data))
                 embed = discord.Embed(title=msg, description= "was successfully sold at the butchery for 100 coins", color=discord.Color.green())
                 await message.channel.send(embed=embed)
-                print()
-            except:
-                await message.channel.send("pokemon probably either doesnt exist or you dont have it")
         if "???help" in message.content:
             embed = discord.Embed(
                 title="commands", description="a list of commands", color=discord.Color.green())

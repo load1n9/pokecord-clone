@@ -20,6 +20,7 @@ class MyClient(discord.Client):
         if message.author == client.user:
 
             return
+        spawn = random.randint(1,100)
         try:
             fclient.query(
                 q.get(q.match(q.index("users_by_name"), str(message.author))))
@@ -31,7 +32,7 @@ class MyClient(discord.Client):
             }
             }
             fclient.query(q.create(q.collection('users'), person_data))
-            
+       
         if "???find" in message.content:
             person = message.content.replace(" ", "",1).replace("???find", "")
             try:
@@ -78,7 +79,7 @@ class MyClient(discord.Client):
                 embed.add_field(name="weight:",value=str(pb.pokemon(p).weight))
                 await message.channel.send(embed=embed)
 
-        if "???catch" in message.content:
+        if spawn == 100:
             pokeid = random.randint(1,898)
             shiny = random.randint(1,100)
             if shiny == 100:
@@ -217,8 +218,6 @@ class MyClient(discord.Client):
         if "???help" in message.content:
             embed = discord.Embed(
                 title="commands", description="a list of commands", color=discord.Color.green())
-            embed.add_field(name="???catch",
-                            value="finds pokemon nearby", inline=True)
             embed.add_field(name="???pokemon",
                             value="list of pokemon", inline=False)
             embed.add_field(name="???find <user>",

@@ -79,7 +79,48 @@ class MyClient(discord.Client):
                 embed.add_field(name="weight:",value=str(pb.pokemon(p).weight))
                 await message.channel.send(embed=embed)
         if "???spawn" in message.content:
-            spawn = 100
+             something = fclient.query(q.get(q.match(q.index("users_by_name"), str(message.author))))
+             reference = something["ref"]
+             if int(something["data"]["coins"]) >= 10:
+                 coins = int(something["data"]["coins"])-10
+                 data = {
+                    "data": {
+                        "coins": coins
+                    }
+                 }
+                 fclient.query(q.update(q.ref(reference), data))
+                 pokeid = random.randint(1,898)
+                 shiny = random.randint(1,100)
+                 if shiny == 100:
+                    begurl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/"
+                 else:
+                    begurl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+                 embed1 = discord.Embed(title="‌‌A wild pokémon has аppeаred!", description="Guess the pokémon аnd type the pokémon's name to cаtch it", color=discord.Color.green())
+                 embed1.set_image(url=begurl+str(pokeid)+".png")
+                 await message.channel.send(embed=embed1)
+                 def check(m):
+                   return m.channel == message.channel and m.author != client.user
+                 msg = await client.wait_for('message',check=check)
+                 if pb.pokemon(pokeid).name in msg.content.lower():
+                     caughtpoke =  pb.pokemon(pokeid).name
+                     something = fclient.query(q.get(q.match(q.index("users_by_name"), str(msg.author))))
+                     pokemon = something["data"]["pokemon"]
+                     reference = something["ref"]
+                     pokemon.append(caughtpoke)
+                     data = {
+                       "data": {
+                          "pokemon": pokemon
+                        }
+                     }
+                     fclient.query(q.update(q.ref(reference), data))
+                     embed = discord.Embed(title=caughtpoke+" was successfully caught", description= "#"+str(pokeid), color=discord.Color.green())
+                     await message.channel.send(embed=embed)
+
+                 else:
+                     await message.channel.send(pb.pokemon(pokeid).name+" fled")
+
+             else:
+                 await message.channel.send("sorry you're lacking coins")
         if spawn == 100:
             pokeid = random.randint(1,898)
             shiny = random.randint(1,100)

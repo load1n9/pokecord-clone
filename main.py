@@ -113,21 +113,29 @@ class MyClient(discord.Client):
 
         if "???sell" in message.content:
             msg = message.content.replace("???sell","").replace(" ","",1)
+            msg = msg.split()
             try:
                 something = fclient.query(q.get(q.match(q.index("users_by_name"), str(message.author))))
+                shop = fclient.query(q.get(q.match(q.index("users_by_name"), "shop")))
                 pokemon = something["data"]["pokemon"]
-                coins = something["data"]["coins"]
+                shopPokemon = shop["data"]["pokemon"]
                 reference = something["ref"]
-                pokemon.remove(msg)
-                coins += 100
+                shopReference = shop["ref"]
+                pokemon.remove(msg[0])
+                shopPokemon.append({"poke":msg[0],"user":str(message.author),"price":int(msg[1])})
+                pokemonData = {
+                    "data": {
+                        "pokemon": shopPokemon
+                    }
+                }
                 data = {
                     "data": {
-                        "pokemon": pokemon,
-                        "coins": coins
+                        "pokemon": pokemon
                     }
                 }
                 fclient.query(q.update(q.ref(reference), data))
-                embed = discord.Embed(title=msg, description= "was successfully transferred", color=discord.Color.green())
+                fclient.query(q.update(q.ref(shopReference), pokemonData))
+                embed = discord.Embed(title=msg, description= "was successfully added to the shop", color=discord.Color.green())
                 await message.channel.send(embed=embed)
             except:
                 await message.channel.send(msg+" doesnt exist or you dont have it")

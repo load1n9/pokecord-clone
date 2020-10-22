@@ -127,10 +127,10 @@ class MyClient(discord.Client):
                     }
                 }
                 fclient.query(q.update(q.ref(reference), data))
-                embed = discord.Embed(title=msg, description= "was successfully sold at the butchery for 100 coins", color=discord.Color.green())
+                embed = discord.Embed(title=msg, description= "was successfully transferred", color=discord.Color.green())
                 await message.channel.send(embed=embed)
             except:
-                await message.channel.send(msg+"doesnt exist or you dont have it")
+                await message.channel.send(msg+" doesnt exist or you dont have it")
         if "???help" in message.content:
             embed = discord.Embed(
                 title="commands", description="a list of commands", color=discord.Color.green())

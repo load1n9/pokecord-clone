@@ -30,6 +30,7 @@ class MyClient(discord.Client):
             spawn = random.randint(90,100)
         else:
             spawn = random.randint(1,100)
+        print(spawn)
         try:
             fclient.query(
                 q.get(q.match(q.index("users_by_name"), str(message.author))))

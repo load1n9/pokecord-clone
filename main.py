@@ -114,6 +114,7 @@ class MyClient(discord.Client):
         if "???sell" in message.content:
                 msg = message.content.replace("???sell","").replace(" ","",1)
                 msg = msg.split()
+                print(msg)
             #try:
                 something = fclient.query(q.get(q.match(q.index("users_by_name"), str(message.author))))
                 shop = fclient.query(q.get(q.match(q.index("users_by_name"), "shop")))

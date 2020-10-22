@@ -139,6 +139,26 @@ class MyClient(discord.Client):
                 await message.channel.send(embed=embed)
             except:
                 await message.channel.send(msg[0]+" doesnt exist or you dont have it")
+        if "???transfer" in message.content:
+            msg = message.content.replace("???transfer","").replace(" ","",1)
+            try:
+                something = fclient.query(q.get(q.match(q.index("users_by_name"), str(message.author))))
+                pokemon = something["data"]["pokemon"]
+                coins = something["data"]["coins"]
+                reference = something["ref"]
+                pokemon.remove(msg)
+                coins += random.randint(10,20)
+                data = {
+                    "data": {
+                        "pokemon": pokemon,
+                        "coins": coins
+                    }
+                }
+                fclient.query(q.update(q.ref(reference), data))
+                embed = discord.Embed(title=msg, description= "was successfully transferred and "+str(coins)+" coins were added", color=discord.Color.green())
+                await message.channel.send(embed=embed)
+            except:
+                await message.channel.send(msg+" doesnt exist or you dont have it")
         if "???shop" in message.content:
                 something = fclient.query(q.get(q.match(q.index("users_by_name"), "shop")))
                 embed = discord.Embed(title="shop", description="pokemon on the market", color=discord.Color.green())
@@ -162,8 +182,10 @@ class MyClient(discord.Client):
                             value="lists details about one of your pokemon", inline=False)
             embed.add_field(name="???coins",
                             value="displays coin count", inline=False)        
-            embed.add_field(name="???sell <pokemon>",
-                            value="sells a pokemon", inline=False)    
+            embed.add_field(name="???transfer <pokemon>",
+                            value="transfers a pokemon for coins", inline=False)  
+            embed.add_field(name="???sell <pokemon> <coins>",
+                            value="puts pokemon up for sale in the shop", inline=False)    
             embed.add_field(name= "???shop",
                             value="displays pokemon in the shop", inline=False)       
             await message.channel.send(embed=embed)

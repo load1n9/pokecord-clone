@@ -121,7 +121,7 @@ class Client(discord.Client):
                 await message.channel.send(embed=embed1)
 
                 def check(m):
-                    return m.channel == message.channel and m.author != client.user
+                    return m.channel == message.channel and m.author != client.user and "???name" in m.content
                 msg = await client.wait_for('message', check=check)
                 if pb.pokemon(pokeid).name in msg.content.lower():
                     caughtpoke = pb.pokemon(pokeid).name

@@ -234,7 +234,8 @@ class MyClient(discord.Client):
                 coins = something["data"]["coins"]
                 reference = something["ref"]
                 pokemon.remove(msg)
-                coins += random.randint(10,20)
+                added = random.randint(10,20)
+                coins += added
                 data = {
                     "data": {
                         "pokemon": pokemon,
@@ -242,7 +243,7 @@ class MyClient(discord.Client):
                     }
                 }
                 fclient.query(q.update(q.ref(reference), data))
-                embed = discord.Embed(title=msg, description= "was successfully transferred and "+str(coins)+" coins were added", color=discord.Color.green())
+                embed = discord.Embed(title=msg, description= "was successfully transferred and "+str(added)+" coins were added", color=discord.Color.green())
                 await message.channel.send(embed=embed)
             except:
                 await message.channel.send(msg+" doesnt exist or you dont have it")

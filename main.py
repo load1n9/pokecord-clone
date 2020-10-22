@@ -116,6 +116,7 @@ class MyClient(discord.Client):
                 something = fclient.query(q.get(q.match(q.index("users_by_name"), str(message.author))))
                 pokemon = something["data"]["pokemon"]
                 coins = something["data"]["coins"]
+                reference = something["ref"]
                 pokemon.remove(msg)
                 coins += 100
                 data = {

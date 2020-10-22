@@ -78,7 +78,8 @@ class MyClient(discord.Client):
                 embed.add_field(name="height:",value=str(pb.pokemon(p).height))
                 embed.add_field(name="weight:",value=str(pb.pokemon(p).weight))
                 await message.channel.send(embed=embed)
-
+        if "???spawn" in message.content:
+            spawn = 100
         if spawn == 100:
             pokeid = random.randint(1,898)
             shiny = random.randint(1,100)

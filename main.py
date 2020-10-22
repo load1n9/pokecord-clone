@@ -136,7 +136,7 @@ class MyClient(discord.Client):
                 }
                 fclient.query(q.update(q.ref(reference), data))
                 fclient.query(q.update(q.ref(shopReference), pokemonData))
-                embed = discord.Embed(title=msg, description= "was successfully added to the shop", color=discord.Color.green())
+                embed = discord.Embed(title=msg[0], description= "was successfully added to the shop", color=discord.Color.green())
                 await message.channel.send(embed=embed)
             #except:
             #    await message.channel.send(msg[0]+" doesnt exist or you dont have it")

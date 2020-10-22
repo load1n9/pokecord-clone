@@ -121,7 +121,7 @@ class MyClient(discord.Client):
 
              else:
                  await message.channel.send("sorry you're lacking coins")
-        if spawn == 100:
+        if spawn >= 97:
             pokeid = random.randint(1,898)
             shiny = random.randint(1,100)
             if shiny == 100:

@@ -140,7 +140,7 @@ class MyClient(discord.Client):
             except:
                 await message.channel.send(msg[0]+" doesnt exist or you dont have it")
         if "???buy" in message.content:
-                msg = int(message.content.replace("???buy","").replace(" ","",1))
+                msg = int(message.content.replace("???buy","").replace(" ","",1))+1
             #try:
                 something = fclient.query(q.get(q.match(q.index("users_by_name"), str(message.author))))
                 shop = fclient.query(q.get(q.match(q.index("users_by_name"), "shop")))
@@ -158,7 +158,8 @@ class MyClient(discord.Client):
                   if buyerCoins >= int(shopPokemon[msg]["price"]):
                      buyerCoins -= int(shopPokemon[msg]["price"])
                      sellerCoins += int(shopPokemon[msg]["price"])
-                     pokemon.append(shopPokemon[msg]["poke"])
+                     boughtThing = shopPokemon[msg]["poke"]
+                     pokemon.append(boughtThing)
                      del shopPokemon[int(msg)]
                      buyerData = {
                        "data" : {
@@ -179,7 +180,7 @@ class MyClient(discord.Client):
                      fclient.query(q.update(q.ref(reference), buyerData))
                      fclient.query(q.update(q.ref(shopReference), shopData))
                      fclient.query(q.update(q.ref(sellerReference), sellerData))
-                     await message.channel.send("success")
+                     await message.channel.send(boughtThing+" was added to your account")
                   else:
                     await message.channel.send("you're lacking coins")
                 
@@ -229,7 +230,9 @@ class MyClient(discord.Client):
             embed.add_field(name="???transfer <pokemon>",
                             value="transfers a pokemon for coins", inline=False)  
             embed.add_field(name="???sell <pokemon> <coins>",
-                            value="puts pokemon up for sale in the shop", inline=False)    
+                            value="puts pokemon up for sale in the shop", inline=False)  
+            embed.add_field(name="???buy <number on list>",
+                            value="buys pokemon from the shop", inline=False)   
             embed.add_field(name= "???shop",
                             value="displays pokemon in the shop", inline=False)       
             await message.channel.send(embed=embed)

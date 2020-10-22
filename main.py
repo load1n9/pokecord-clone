@@ -176,9 +176,9 @@ class MyClient(discord.Client):
                    fclient.query(q.update(q.ref(reference), buyerData))
                    fclient.query(q.update(q.ref(shopReference), shopData))
                    fclient.query(q.update(q.ref(sellerReference), sellerData))
-                   message.channel.send("success")
+                   await message.channel.send("success")
                 else:
-                  message.channel.send("you're lacking coins")
+                  await message.channel.send("you're lacking coins")
                 
         if "???transfer" in message.content:
             msg = message.content.replace("???transfer","").replace(" ","",1)

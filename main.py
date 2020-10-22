@@ -132,9 +132,8 @@ class MyClient(discord.Client):
             except:
                 await message.channel.send(msg+" doesnt exist or you dont have it")
         if "???shop" in message.content:
-            try:
                 something = fclient.query(q.get(q.match(q.index("users_by_name"), "shop")))
-                embed = discord.Embed(title="shop", color=discord.Color.green())
+                embed = discord.Embed(title="shop", description="pokemon on the market", color=discord.Color.green())
                 for p in something["data"]["pokemon"]:
                    embed.add_field(name="----------------", value = "...",inline=True)
                    embed.add_field(name="pokemon: ", value = p.poke,inline=True)
@@ -142,8 +141,6 @@ class MyClient(discord.Client):
                    embed.add_field(name="user: ", value = p.user,inline=True)
 
                 await message.channel.send(embed=embed)
-            except:
-                await message.channel.send("something went wrong")
 
         if "???help" in message.content:
             embed = discord.Embed(

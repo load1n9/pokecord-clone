@@ -43,7 +43,7 @@ class Client(discord.Client):
             fclient.query(q.create(q.collection('users'), person_data))
 
         if "???find" in message.content:
-            person = message.content.replace(" ", "", 1).replace(("???find",">","<","@"), "")
+            person = message.content.replace(" ", "", 1).replace("???find", "").replace(">", "").replace("<", "").replace("@", "").replace("!", "")
             try:
                 something = fclient.query(
                     q.get(q.match(q.index("users_by_name"), str(person))))

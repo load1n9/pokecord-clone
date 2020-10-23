@@ -292,7 +292,10 @@ class Client(discord.Client):
             for p in something["data"]["pokemon"]:
                 embed.add_field(name="pokemon: ", value=p["poke"], inline=True)
                 embed.add_field(name="price: ", value=p["price"], inline=True)
-                embed.add_field(name="user: ", value=p["user"], inline=True)
+                try:
+                    embed.add_field(name="user: ", value=str(self.get_user(int(p["user"]))), inline=True)
+                except:
+                    embed.add_field(name="user: ", value=p["user"], inline=True)
 
             await message.channel.send(embed=embed)
 

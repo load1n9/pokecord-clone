@@ -32,10 +32,10 @@ class Client(discord.Client):
             spawn = random.randint(1, 100)
         try:
             fclient.query(
-                q.get(q.match(q.index("users_by_name"), str(message.author))))
+                q.get(q.match(q.index("users_by_name"), str(message.author.id))))
         except:
             person_data = {"data": {
-                "name": str(message.author),
+                "name": str(message.author.id),
                 "coins": 0,
                 "pokemon": []
             }
@@ -59,7 +59,7 @@ class Client(discord.Client):
 
         if "???pokemon" in message.content:
             something = fclient.query(
-                q.get(q.match(q.index("users_by_name"), str(message.author))))
+                q.get(q.match(q.index("users_by_name"), str(message.author.id))))
             embed = discord.Embed(
                 title=str(message.author)+"'s pokemon", color=discord.Color.green())
             for p in something["data"]["pokemon"]:
@@ -67,11 +67,11 @@ class Client(discord.Client):
             await message.channel.send(embed=embed)
         if "???coins" in message.content:
             something = fclient.query(
-                q.get(q.match(q.index("users_by_name"), str(message.author))))
+                q.get(q.match(q.index("users_by_name"), str(message.author.id))))
             await message.channel.send("coins: "+str(something["data"]["coins"]))
         if "???select" in message.content:
             something = fclient.query(
-                q.get(q.match(q.index("users_by_name"), str(message.author))))
+                q.get(q.match(q.index("users_by_name"), str(message.author.id))))
             msg = int(message.content.replace(
                 " ", "").replace("???select", ""))
             p = something["data"]["pokemon"][msg-1]
@@ -99,7 +99,7 @@ class Client(discord.Client):
                 await message.channel.send(embed=embed)
         if "???spawn" in message.content:
             something = fclient.query(
-                q.get(q.match(q.index("users_by_name"), str(message.author))))
+                q.get(q.match(q.index("users_by_name"), str(message.author.id))))
             reference = something["ref"]
             if int(something["data"]["coins"]) >= 10:
                 coins = int(something["data"]["coins"])-10
@@ -185,7 +185,7 @@ class Client(discord.Client):
             msg = msg.split()
             try:
                 something = fclient.query(
-                    q.get(q.match(q.index("users_by_name"), str(message.author))))
+                    q.get(q.match(q.index("users_by_name"), str(message.author.id))))
                 shop = fclient.query(
                     q.get(q.match(q.index("users_by_name"), "shop")))
                 pokemon = something["data"]["pokemon"]
@@ -194,7 +194,7 @@ class Client(discord.Client):
                 shopReference = shop["ref"]
                 pokemon.remove(msg[0])
                 shopPokemon.append({"poke": msg[0], "user": str(
-                    message.author), "price": int(msg[1])})
+                    message.author.id), "price": int(msg[1])})
                 pokemonData = {
                     "data": {
                         "pokemon": shopPokemon
@@ -216,7 +216,7 @@ class Client(discord.Client):
             msg = int(message.content.replace(
                 "???buy", "").replace(" ", "", 1))-1
             something = fclient.query(
-                q.get(q.match(q.index("users_by_name"), str(message.author))))
+                q.get(q.match(q.index("users_by_name"), str(message.author.id))))
             shop = fclient.query(
                 q.get(q.match(q.index("users_by_name"), "shop")))
             pokemon = something["data"]["pokemon"]
@@ -225,7 +225,7 @@ class Client(discord.Client):
             shopReference = shop["ref"]
             seller = fclient.query(
                 q.get(q.match(q.index("users_by_name"), str(shopPokemon[msg]["user"]))))
-            if str(message.author) == str(shopPokemon[msg]["user"]):
+            if str(message.author.id) == str(shopPokemon[msg]["user"]):
                 await message.channel.send("sorry you cannot buy your own pokemon")
             else:
                 sellerCoins = int(seller["data"]["coins"])
@@ -265,7 +265,7 @@ class Client(discord.Client):
                 "???transfer", "").replace(" ", "", 1)
             try:
                 something = fclient.query(
-                    q.get(q.match(q.index("users_by_name"), str(message.author))))
+                    q.get(q.match(q.index("users_by_name"), str(message.author.id))))
                 pokemon = something["data"]["pokemon"]
                 coins = something["data"]["coins"]
                 reference = something["ref"]

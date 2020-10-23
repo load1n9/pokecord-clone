@@ -126,7 +126,7 @@ class Client(discord.Client):
                 if pb.pokemon(pokeid).name in msg.content.lower():
                     caughtpoke = pb.pokemon(pokeid).name
                     something = fclient.query(
-                        q.get(q.match(q.index("users_by_name"), str(msg.author))))
+                        q.get(q.match(q.index("users_by_name"), str(msg.author.id))))
                     pokemon = something["data"]["pokemon"]
                     reference = something["ref"]
                     pokemon.append(caughtpoke)
@@ -163,7 +163,7 @@ class Client(discord.Client):
             if pb.pokemon(pokeid).name in msg.content.lower():
                 caughtpoke = pb.pokemon(pokeid).name
                 something = fclient.query(
-                    q.get(q.match(q.index("users_by_name"), str(msg.author))))
+                    q.get(q.match(q.index("users_by_name"), str(msg.author.id))))
                 pokemon = something["data"]["pokemon"]
                 reference = something["ref"]
                 pokemon.append(caughtpoke)

@@ -26,12 +26,7 @@ class Client(discord.Client):
         if message.author == client.user:
 
             return
-        if "pokemon" or "bot" in message.channel.name:
-            spawn = random.randint(50, 100)
-            print("botroom: ",spawn,message.channel.name)
-        else:
             spawn = random.randint(1, 100)
-            print("regular channel: ",spawn)
         try:
             fclient.query(
                 q.get(q.match(q.index("users_by_name"), str(message.author.id))))

@@ -28,8 +28,10 @@ class Client(discord.Client):
             return
         if "pokemon" or "bot" in message.channel.name:
             spawn = random.randint(50, 100)
+            print("botroom: ",spawn)
         else:
             spawn = random.randint(1, 100)
+            print("regular channel: ",spawn)
         try:
             fclient.query(
                 q.get(q.match(q.index("users_by_name"), str(message.author.id))))
@@ -145,7 +147,7 @@ class Client(discord.Client):
 
             else:
                 await message.channel.send("sorry you're lacking coins")
-        if spawn >= 99:
+        if spawn == 100:
             pokeid = random.randint(1, 898)
             shiny = random.randint(1, 100)
             if shiny == 100:

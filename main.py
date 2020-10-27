@@ -28,7 +28,7 @@ class Client(discord.Client):
             return
         if "pokemon" or "bot" in message.channel.name:
             spawn = random.randint(50, 100)
-            print("botroom: ",spawn)
+            print("botroom: ",spawn,message.channel.name)
         else:
             spawn = random.randint(1, 100)
             print("regular channel: ",spawn)

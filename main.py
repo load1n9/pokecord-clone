@@ -184,12 +184,16 @@ class Client(discord.Client):
                     q.get(q.match(q.index("users_by_name"), str(message.author.id))))
             hmm,useless,typething = something["data"]["pokemon"][0].partition("-")
             p1 = int(str(pb.pokemon(hmm).id))
+            embed = discord.Embed(title=str(pb.pokemon(p1).name)+" || "+str(pb.pokemon(p2).name),
+                                   description="...", color=discord.Color.green())
+            counter = 0
             await message.channel.send("do not panic this may take some time")
-            logs = await message.channel.send(str(pb.pokemon(p1))+" : " + str(pb.pokemon(p2)))
             thing = Battle(p1,p2)
             for x in thing.data["msg"]:
-               await logs.edit(content=str(x))
-            await message.channel.send(str(thing.data["pokemon"])+"paralyzed the other pokemon")
+              counter += 1
+              embed.add_field(name=str(counter)+": ", value=x, inline=False)
+            embed.set_footer(text=str(thing.data["pokemon"])+" wins")
+            await message.channel.send(embed=embed)
           except:
             await message.channel.send("something went wrong")
         if "???sell" in message.content:

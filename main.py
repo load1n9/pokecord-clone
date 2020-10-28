@@ -176,7 +176,7 @@ class Client(discord.Client):
                 await message.channel.send(embed=embed)
 
             else:
-                await message.channel.send(pb.pokemon(pokeid).name+" fled")
+                await message.channel.send(pb.pokemon(pokeid).name+" fled")      
         if "???battle" in message.content:
           try:
             p2 = int(message.content.replace("???battle","").replace(" ",""))
@@ -192,8 +192,8 @@ class Client(discord.Client):
             for x in thing.data["msg"]:
               counter += 1
               embed.add_field(name=str(counter)+": ", value=x, inline=False)
-            embed.set_footer(text=str(thing.data["pokemon"])+" wins")
             await message.channel.send(embed=embed)
+            await message.channel.send(str(thing.data["pokemon"])+" wins")
           except:
             await message.channel.send("something went wrong")
         if "???sell" in message.content:

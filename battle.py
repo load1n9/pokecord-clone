@@ -28,13 +28,13 @@ class Battle:
       self.attack()
     def attack(self):
       if int(self.p1["health"]) > 0 and int(self.p2["health"]) > 0:
+        self.data["msg"].append(self.p1["name"]+": "+str(self.p1["health"]))
+        self.data["msg"].append(self.p2["name"]+": "+str(self.p2["health"]))
         try:  
           self.data["msg"].append(self.p1["name"]+" uses "+self.p1["move"])
           self.p1["health"] -= int(pb.move(str(self.p2["move"])).power)
           self.data["msg"].append(self.p2["name"]+" uses "+self.p2["move"])
           self.p2["health"] -= int(pb.move(str(self.p1["move"])).power)
-          self.data["msg"].append(self.p1["name"]+": "+str(self.p1["health"]))
-          self.data["msg"].append(self.p2["name"]+": "+str(self.p2["health"]))
           self.setMoves()
         except:
           self.setMoves()

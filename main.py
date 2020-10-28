@@ -2,6 +2,7 @@ import discord
 import os
 import random
 import pokebase as pb
+from battle import Battle
 from faunadb import query as q
 from faunadb.objects import Ref
 from faunadb.client import FaunaClient
@@ -176,7 +177,24 @@ class Client(discord.Client):
 
             else:
                 await message.channel.send(pb.pokemon(pokeid).name+" fled")
-
+        if "???battle" in message.content:
+          try:
+            p2 = int(message.content.replace("???battle","").replace(" ",""))
+            something = fclient.query(
+                    q.get(q.match(q.index("users_by_name"), str(message.author.id))))
+            hmm,useless,typething = something["data"]["pokemon"][0].partition("-")
+            p1 = int(str(pb.pokemon(hmm).id))
+            embed = discord.Embed(title="‌‌battle logs",
+                                   description="...", color=discord.Color.green())
+            counter = 0
+            await message.channel.send("do not panic this may take some time")
+            thing = Battle(p1,p2)
+            for x in thing.data["msg"]:
+              counter += 1
+              embed.add_field(name=str(counter)+": ", value=x, inline=True)
+            await message.channel.send(embed=embed)
+          except:
+            await message.channel.send("something went wrong")
         if "???sell" in message.content:
             msg = message.content.replace("???sell", "").replace(" ", "", 1)
             msg = msg.split()

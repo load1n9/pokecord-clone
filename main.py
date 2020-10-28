@@ -191,7 +191,7 @@ class Client(discord.Client):
             thing = Battle(p1,p2)
             for x in thing.data["msg"]:
               counter += 1
-              embed.add_field(name=str(counter)+": ", value=x, inline=True)
+              embed.add_field(name=str(counter)+": ", value=x, inline=False)
             await message.channel.send(embed=embed)
           except:
             await message.channel.send("something went wrong")

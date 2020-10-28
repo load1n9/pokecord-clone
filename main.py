@@ -193,7 +193,6 @@ class Client(discord.Client):
               counter += 1
               embed.add_field(name=str(counter)+": ", value=x, inline=False)
             await message.channel.send(embed=embed)
-            await message.channel.send(str(thing.data["pokemon"])+" wins")
           except:
             await message.channel.send("something went wrong")
         if "???sell" in message.content:

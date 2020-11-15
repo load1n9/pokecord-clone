@@ -68,7 +68,7 @@ class Client(discord.Client):
                 q.get(q.match(q.index("users_by_name"), str(message.author.id))))
             await message.channel.send("coins: "+str(something["data"]["coins"]))
         if "???brainfuck" in message.content:
-            msg = message.content.replace(" ","").replace("???bf","")
+            msg = message.content.replace(" ","").replace("???brainfuck","")
             r = requests.get('https://denorest.herokuapp.com/brainfuck/'+msg)
             await message.channel.send(str(r.text))
         if "???select" in message.content:

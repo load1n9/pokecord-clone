@@ -1,5 +1,6 @@
 import discord
 import os
+import requests
 import random
 import pokebase as pb
 from faunadb import query as q
@@ -66,6 +67,10 @@ class Client(discord.Client):
             something = fclient.query(
                 q.get(q.match(q.index("users_by_name"), str(message.author.id))))
             await message.channel.send("coins: "+str(something["data"]["coins"]))
+        if "???bf" in message.content:
+            msg = message.content.replace(" ","").replace("???bf","")
+            r = requests.get('https://denorest.herokuapp.com/brainfuck/'+'msg')
+            await message.channel.send(str(r.text))
         if "???select" in message.content:
             something = fclient.query(
                 q.get(q.match(q.index("users_by_name"), str(message.author.id))))

@@ -69,7 +69,7 @@ class Client(discord.Client):
             await message.channel.send("coins: "+str(something["data"]["coins"]))
         if "???bf" in message.content:
             msg = message.content.replace(" ","").replace("???bf","")
-            r = requests.get('https://denorest.herokuapp.com/brainfuck/'+'msg')
+            r = requests.get('https://denorest.herokuapp.com/brainfuck/'+msg)
             await message.channel.send(str(r.text))
         if "???select" in message.content:
             something = fclient.query(

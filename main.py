@@ -147,7 +147,7 @@ class Client(discord.Client):
 
             else:
                 await message.channel.send("sorry you're lacking coins")
-        if spawn == 100:
+        if "???catch" in message.content:
             pokeid = random.randint(1, 898)
             shiny = random.randint(1, 100)
             if shiny == 100:
@@ -319,7 +319,7 @@ class Client(discord.Client):
                             value="buys pokemon from the shop", inline=False)
             embed.add_field(name="???shop",
                             value="displays pokemon in the shop", inline=False)
-            embed.add_field(name="???summon",
+            embed.add_field(name="???catch",
                             value="summons pokemon", inline=False)
             await message.channel.send(embed=embed)
 
